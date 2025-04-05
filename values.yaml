@@ -1,0 +1,19 @@
+global:
+  environment: production
+
+frontend:
+  image:
+    repository: yourregistry.azurecr.io/your-app/client
+    tag: latest
+  service:
+    type: ClusterIP
+    port: 80
+
+microservices:
+  service1:
+    image:
+      repository: yourregistry.azurecr.io/your-app/service-1
+      tag: latest
+    service:
+      type: ClusterIP
+      port: 8080

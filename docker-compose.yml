@@ -24,7 +24,7 @@ services:
       - sameNetworkAsMysql # Connects the service to the 'sameNetworkAsMysql' network
     depends_on:
       - db # Specifies that the 'api' service depends on the 'db' service
-
+    image: kemalcan/docker-mysql-nodejs-reactjs-app:api
   frontend: # Defines the 'frontend' service for the frontend app
     restart: on-failure # Restarts the container if it fails
     build: # Builds the frontend app using the provided Dockerfile
@@ -35,6 +35,7 @@ services:
       - sameNetworkAsMysql # Connects the service to the 'sameNetworkAsMysql' network
     depends_on:
       - api # Specifies that the 'frontend' service depends on the 'api' service
+    image: kemalcan/docker-mysql-nodejs-reactjs-app:frontend
 
 networks:
   sameNetworkAsMysql: # Defines the 'sameNetworkAsMysql' network
