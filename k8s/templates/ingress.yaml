@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: 9.141.122.205  # or use your public IP for now
+  - host: "9.141.122.205"  # or use your public IP for now
     http:
       paths:
       - path: /
