@@ -10,8 +10,14 @@ COPY package*.json ./
 # Install the dependencies
 RUN npm install
 
+# Install react-scripts globally
+RUN npm install -g react-scripts
+
 # Copy the rest of the application's source code to the container
 COPY . .
+
+# Fix permission issues on node_modules binaries
+RUN chmod +x ./node_modules/.bin/*
 
 # Build the React.js application
 RUN npm run build
