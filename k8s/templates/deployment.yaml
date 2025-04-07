@@ -80,13 +80,13 @@ spec:
           preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 100
             podAffinityTerm:
-              topologyKey: kubernetes.io/hostname
+              topologyKey: kubernetes.io/demokub8cluster-dns-4dkx8w6u.hcp.germanywestcentral.azmk8s.io
               labelSelector:
                 matchLabels:
                   app.kubernetes.io/name: kemalcan-dev-nodejs-app
       topologySpreadConstraints:
         - maxSkew: 1
-          topologyKey: kubernetes.io/hostname
+          topologyKey: kubernetes.io/demokub8cluster-dns-4dkx8w6u.hcp.germanywestcentral.azmk8s.io
           whenUnsatisfiable: ScheduleAnyway
           labelSelector:
             matchLabels:

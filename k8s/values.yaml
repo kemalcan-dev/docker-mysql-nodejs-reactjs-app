@@ -23,7 +23,7 @@ mysql:
   image:
     repository: mysql
     tag: 8.0
-  rootPassword: "pass123"  # Should use a secret in production
+  rootPassword: "pass123"  # - Should use a secret in production
   database: "appdb"
   user: "appuser"
-  password: "pass123"  # Should use a secret in production
+  password: "pass123"  # - Should use a secret in production
