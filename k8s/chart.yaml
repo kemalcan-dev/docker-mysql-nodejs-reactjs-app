@@ -1,5 +1,5 @@
 apiVersion: v2
-name: docker-nodejs-react
+name: docker-mysql-nodejs-reactjs-app
 description: A Helm chart for your microservices application
 type: application
 version: 0.1.0

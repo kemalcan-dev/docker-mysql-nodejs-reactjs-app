@@ -1,19 +1,29 @@
 global:
   environment: production
 
+image:
+  repository: defaultrgcontainer.azurecr.io/docker-mysql-nodejs-reactjs-app
+  tag: latest
+  pullPolicy: Always
+
 frontend:
-  image:
-    repository: defaultrgcontainer.azurecr.io/docker-mysql-nodejs-reactjs-app/frondend
-    tag: latest
+  replicaCount: 1
   service:
     type: ClusterIP
     port: 80
 
 microservices:
-  service1:
-    image:
-      repository: defaultrgcontainer.azurecr.io/docker-mysql-nodejs-reactjs-app/backend
-      tag: latest
+    replicaCount: 1
     service:
       type: ClusterIP
       port: 8080
+
+mysql:
+  enabled: true
+  image:
+    repository: mysql
+    tag: 8.0
+  rootPassword: "pass123"  # Should use a secret in production
+  database: "appdb"
+  user: "appuser"
+  password: "pass123"  # Should use a secret in production
