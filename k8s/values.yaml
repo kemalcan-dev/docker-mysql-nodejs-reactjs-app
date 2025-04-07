@@ -3,7 +3,7 @@ global:
 
 frontend:
   image:
-    repository: yourregistry.azurecr.io/your-app/client
+    repository: defaultrgcontainer.azurecr.io/docker-mysql-nodejs-reactjs-app/frondend
     tag: latest
   service:
     type: ClusterIP
@@ -12,7 +12,7 @@ frontend:
 microservices:
   service1:
     image:
-      repository: yourregistry.azurecr.io/your-app/service-1
+      repository: defaultrgcontainer.azurecr.io/docker-mysql-nodejs-reactjs-app/backend
       tag: latest
     service:
       type: ClusterIP

@@ -6,10 +6,10 @@ on:
     branches: [ main ]
 
 env:
-  AZURE_REGISTRY: yourregistry.azurecr.io
-  RESOURCE_GROUP: your-resource-group
-  AKS_CLUSTER: your-aks-cluster
-  HELM_RELEASE_NAME: your-app
+  AZURE_REGISTRY: defaultrgcontainer.azurecr.io
+  RESOURCE_GROUP: BTKONSEPT_RG
+  AKS_CLUSTER: demoKub8Cluster
+  HELM_RELEASE_NAME: docker-mysql-nodejs-reactjs-app
 
 jobs:
   build-and-deploy:
@@ -33,21 +33,21 @@ jobs:
         username: ${{ secrets.ACR_USERNAME }}
         password: ${{ secrets.ACR_PASSWORD }}
 
-    # Build and push client
-    - name: Build and push client
+    # Build and push frontend
+    - name: Build and push frontend
       uses: docker/build-push-action@v4
       with:
-        context: ./client
+        context: ./frontend
         push: true
-        tags: ${{ env.AZURE_REGISTRY }}/your-app/client:${{ github.sha }}
+        tags: ${{ env.AZURE_REGISTRY }}/docker-mysql-nodejs-reactjs-app/frontend:${{ github.sha }}
 
     # Build and push microservices
     - name: Build and push service-1
       uses: docker/build-push-action@v4
       with: 
-        context: ./services/service-1
+        context: ./backend
         push: true
-        tags: ${{ env.AZURE_REGISTRY }}/your-app/service-1:${{ github.sha }}
+        tags: ${{ env.AZURE_REGISTRY }}/docker-mysql-nodejs-reactjs-app/backend:${{ github.sha }}
 
     # Set up kubectl
     - name: Set up kubectl
@@ -66,10 +66,10 @@ jobs:
     # Update Helm values with new image tags
     - name: Update Helm values
       run: |
-        sed -i "s|tag:.*|tag: ${{ github.sha }}|g" ./k8s/helm-charts/your-app/values.yaml
+        sed -i "s|tag:.*|tag: ${{ github.sha }}|g" ./k8s/values.yaml
 
     # Deploy with Helm
     - name: Deploy to AKS with Helm
       run: |
-        helm upgrade --install ${{ env.HELM_RELEASE_NAME }} ./k8s/helm-charts/your-app \
-          --namespace your-namespace --create-namespace
+        helm upgrade --install ${{ env.HELM_RELEASE_NAME }} ./k8s \
+          --namespace azcontainerregnamespace --create-namespace
