@@ -71,5 +71,5 @@ jobs:
     # Deploy with Helm
     - name: Deploy to AKS with Helm
       run: |
-        helm upgrade --install ${{ env.HELM_RELEASE_NAME }} /k8s/chart.yaml \
+        helm upgrade --install ${{ env.HELM_RELEASE_NAME }} ./k8s/Chart.yaml \
           --namespace azcontainerregnamespace --create-namespace
