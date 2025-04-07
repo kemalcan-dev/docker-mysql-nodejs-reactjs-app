@@ -67,9 +67,15 @@ jobs:
     - name: Update Helm values
       run: |
         sed -i "s|tag:.*|tag: ${{ github.sha }}|g" ./k8s/values.yaml
+    
+    - name: Debug - List directories
+      run: |
+        pwd
+        ls -la
+        find . -name "Chart.yaml"
 
     # Deploy with Helm
     - name: Deploy to AKS with Helm
       run: |
-        helm upgrade --install ${{ env.HELM_RELEASE_NAME }} ./k8s/Chart.yaml \
+        helm upgrade --install ${{ env.HELM_RELEASE_NAME }} ./k8s \
           --namespace azcontainerregnamespace --create-namespace
