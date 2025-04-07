@@ -42,7 +42,7 @@ jobs:
         tags: ${{ env.AZURE_REGISTRY }}/docker-mysql-nodejs-reactjs-app/frontend:${{ github.sha }}
 
     # Build and push microservices
-    - name: Build and push service-1
+    - name: Build and push microservices
       uses: docker/build-push-action@v4
       with: 
         context: ./backend
