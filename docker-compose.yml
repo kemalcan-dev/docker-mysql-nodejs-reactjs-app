@@ -37,6 +37,14 @@ services:
       - api # Specifies that the 'frontend' service depends on the 'api' service
     image: kemalcan/docker-mysql-nodejs-reactjs-app:frontend
 
+  adminer: # Defines the 'adminer' service for database management
+    image: adminer # Uses the Adminer Docker image for database management
+    restart: always # Always restarts the container
+    ports:
+      - 8080:8080 # Maps the container's port 8080 to the host's port 8080
+    networks:
+      - sameNetworkAsMysql # Connects the service to the 'sameNetworkAsMysql' network
+
 networks:
   sameNetworkAsMysql: # Defines the 'sameNetworkAsMysql' network
     driver: bridge # Specifies the network driver as 'bridge'
